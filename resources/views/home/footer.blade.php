@@ -67,10 +67,7 @@
         </div>
     </footer>
 
-    <!-- Chat Button -->
-    <button class="chat-button">
-        <i class="bi bi-chat-dots"></i>
-    </button>
+    
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
