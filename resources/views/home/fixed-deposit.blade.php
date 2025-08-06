@@ -1041,7 +1041,7 @@
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    The minimum amount required to open a fixed deposit at Elite Mutual Fund is $1,000 for regular FDs. This low entry barrier makes it accessible for most investors to start their journey towards financial security.
+                                    The minimum amount required to open a fixed deposit at Elite Mutual Investment is $1,000 for regular FDs. This low entry barrier makes it accessible for most investors to start their journey towards financial security.
                                 </div>
                             </div>
                         </div>
@@ -1083,7 +1083,7 @@
                             </h2>
                             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    Elite Mutual Fund offers multiple interest payout options to suit your financial needs:
+                                    Elite Mutual Investment offers multiple interest payout options to suit your financial needs:
                                     <ul>
                                         <li>Monthly Interest Payout: Ideal for regular income needs</li>
                                         <li>Quarterly Interest Payout: For periodic income requirements</li>
@@ -1145,7 +1145,7 @@
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <div class="footer-logo">
                         <div class="footer-logo-icon">E</div>
-                        <span class="footer-logo-text">Elite Mutual Fund</span>
+                        <span class="footer-logo-text">Elite Mutual Investment</span>
                     </div>
                     <p class="footer-description">
                         Smart financial solutions for a secure future. Invest wisely, grow steadily.
@@ -1195,7 +1195,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p class="footer-copyright">© 2024 Elite Mutual Fund. All rights reserved.</p>
+                <p class="footer-copyright">© 2024 Elite Mutual Investment. All rights reserved.</p>
                 <div class="footer-legal-links">
                     <a href="privacy-policy.html" class="footer-legal-link">Privacy Policy</a>
                     <a href="terms-of-service.html" class="footer-legal-link">Terms of Service</a>

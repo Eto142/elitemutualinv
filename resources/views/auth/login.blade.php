@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elite Mutual Fund - Login</title>
+  <title>Elite Mutual Investment - Login</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
       <!-- Include Toastr & jQuery (make sure these are above the script block below) -->
@@ -296,7 +296,7 @@
       <div class="logo-container">
         <div class="logo">
           <div class="logo-badge">E</div>
-          <span class="logo-text">Elite Mutual Fund</span>
+          <span class="logo-text">Elite Mutual Investment</span>
         </div>
         
         <!-- Form Header -->
@@ -347,7 +347,7 @@
       
       <!-- Footer -->
       <div class="footer">
-        &copy; 2024 Elite Mutual Fund. All rights reserved.
+        &copy; 2024 Elite Mutual Investment. All rights reserved.
       </div>
     </div>
   </div>

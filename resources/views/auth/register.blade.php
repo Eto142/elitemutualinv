@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elite Mutual Fund - Register</title>
+  <title>Elite Mutual Investment - Register</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
       <!-- Toastr CSS -->
@@ -337,7 +337,7 @@
       <div class="logo-container">
         <div class="logo">
           <div class="logo-badge">E</div>
-          <span class="logo-text">Elite Mutual Fund</span>
+          <span class="logo-text">Elite Mutual Investment</span>
         </div>
         
         <!-- Form Header -->

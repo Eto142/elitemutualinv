@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Elite Mutual Fund - Withdrawal</title>
+    <title>Elite Mutual Investment - Withdrawal</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -249,7 +249,7 @@
             <div class="sidebar-header">
                 <div class="d-flex align-items-center gap-3">
                     <div class="logo-e">E</div>
-                    <span class="fw-semibold text-dark">Elite Mutual Fund</span>
+                    <span class="fw-semibold text-dark">Elite Mutual Investment</span>
                 </div>
             </div>
             <div class="sidebar-nav scrollbar-hide">

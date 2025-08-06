@@ -5,7 +5,7 @@
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <div class="footer-logo">
                         <div class="footer-logo-icon">E</div>
-                        <span class="footer-logo-text">Elite Mutual Fund</span>
+                        <span class="footer-logo-text">Elite Mutual Investment</span>
                     </div>
                     <p class="footer-description">
                         Smart financial solutions for a secure future. Invest wisely, grow steadily.
@@ -57,7 +57,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p class="footer-copyright">© 2023 Elite Mutual Fund. All rights reserved.</p>
+                <p class="footer-copyright">© 2023 Elite Mutual Investment. All rights reserved.</p>
                 <div class="footer-legal-links">
                     <a href="#" class="footer-legal-link">Privacy Policy</a>
                     <a href="#" class="footer-legal-link">Terms of Service</a>

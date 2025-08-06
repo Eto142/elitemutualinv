@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Elite Mutual Fund - Smart financial solutions for a secure future. Invest wisely, grow steadily.">
-    <title>Elite Mutual Fund - Smart Investing for a Secure Future</title>
+    <meta name="description" content="Elite Mutual Investment - Smart financial solutions for a secure future. Invest wisely, grow steadily.">
+    <title>Elite Mutual Investment - Smart Investing for a Secure Future</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -792,7 +792,7 @@
         <div class="container">
             <div class="logo-container">
                 <div class="logo-icon">E</div>
-                <h1 class="brand-name">Elite Mutual Fund</h1>
+                <h1 class="brand-name">Elite Mutual Investment</h1>
             </div>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

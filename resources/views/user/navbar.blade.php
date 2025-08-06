@@ -4,7 +4,7 @@
             <div class="sidebar-header">
                 <div class="d-flex align-items-center gap-3">
                     <div class="logo-e">E</div>
-                    <span class="fw-semibold text-dark">Elite Mutual Fund</span>
+                    <span class="fw-semibold text-dark">Elite Mutual Investment</span>
                 </div>
             </div>
             <div class="sidebar-nav scrollbar-hide">

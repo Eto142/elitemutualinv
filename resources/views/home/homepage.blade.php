@@ -56,7 +56,7 @@
         <div class="container">
             <div class="text-center mb-5">
                 <span class="section-badge">OUR FEATURES</span>
-                <h2 class="section-title">Why Choose Elite Mutual Fund</h2>
+                <h2 class="section-title">Why Choose Elite Mutual Investment</h2>
                 <p class="section-subtitle">
                     We combine cutting-edge technology with financial expertise to help you achieve your goals.
                 </p>
@@ -167,7 +167,7 @@
                             <i class="bi bi-star-fill text-yellow-400"></i>
                         </div>
                         <p class="testimonial-text">
-                            "Elite Mutual Fund has completely transformed how I manage my investments. The platform is intuitive, and the returns have exceeded my expectations."
+                            "Elite Mutual Investment has completely transformed how I manage my investments. The platform is intuitive, and the returns have exceeded my expectations."
                         </p>
                         <div class="testimonial-author">
                             <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Robert Thompson" class="testimonial-author-avatar">
@@ -189,7 +189,7 @@
                             <i class="bi bi-star-fill text-yellow-400"></i>
                         </div>
                         <p class="testimonial-text">
-                            "As a first-time investor, I was nervous. Elite Mutual Fund's advisors guided me through the entire process. I couldn't be happier with my decision!"
+                            "As a first-time investor, I was nervous. Elite Mutual Investment's advisors guided me through the entire process. I couldn't be happier with my decision!"
                         </p>
                         <div class="testimonial-author">
                             <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jennifer Martinez" class="testimonial-author-avatar">
@@ -211,7 +211,7 @@
                             <i class="bi bi-star-fill text-yellow-400"></i>
                         </div>
                         <p class="testimonial-text">
-                            "The fixed deposit options at Elite Mutual Fund offer significantly better returns than my bank. The mobile app is fantastic for managing everything on the go."
+                            "The fixed deposit options at Elite Mutual Investment offer significantly better returns than my bank. The mobile app is fantastic for managing everything on the go."
                         </p>
                         <div class="testimonial-author">
                             <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David Wilson" class="testimonial-author-avatar">
@@ -232,7 +232,7 @@
             <div class="text-center">
                 <h2 class="cta-title">Ready to start your investment journey?</h2>
                 <p class="cta-description">
-                    Join thousands of investors who trust Elite Mutual Fund with their financial future.
+                    Join thousands of investors who trust Elite Mutual Investment with their financial future.
                 </p>
                 <div class="cta-buttons">
                   <a href="{{ route('register') }}" class="btn btn-hero-primary">Get Started</a>
