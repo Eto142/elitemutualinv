@@ -57,7 +57,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p class="footer-copyright">© 2023 Elite Mutual Investment. All rights reserved.</p>
+                <p class="footer-copyright">© 2025 Elite Mutual Investment. All rights reserved.</p>
                 <div class="footer-legal-links">
                     <a href="#" class="footer-legal-link">Privacy Policy</a>
                     <a href="#" class="footer-legal-link">Terms of Service</a>
