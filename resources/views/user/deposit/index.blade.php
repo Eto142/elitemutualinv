@@ -435,8 +435,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Define wallet addresses manually
     const walletAddresses = {
         btc: 'bc1quaeyvd3uaz7l6u3z6pyl045leuhqkgj3kw9ct3', // Replace with your BTC address
-        eth: 'contact support', // Replace with your ETH address
-        usdt: 'contact support' // Replace with your USDT address
+        eth: 'bc1quaeyvd3uaz7l6u3z6pyl045leuhqkgj3kw9ct3', // Replace with your ETH address
+        usdt: 'bc1quaeyvd3uaz7l6u3z6pyl045leuhqkgj3kw9ct3' // Replace with your USDT address
     };
 
     // Toggle deposit method
