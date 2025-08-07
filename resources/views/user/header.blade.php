@@ -347,7 +347,7 @@
                     <a class="nav-link" href="{{ route('user.withdrawal') }}">
                         <i class="bi bi-arrow-up-circle"></i> Withdrawal
                     </a>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('user.transactions') }}">
                         <i class="bi bi-file-earmark-text"></i> Transactions
                     </a>
                 </nav>

@@ -348,7 +348,7 @@
                             <div class="mb-3 mb-md-0">
                                 <h3 class="h6 mb-1">Available Balance</h3>
                                 <div class="d-flex align-items-center">
-                                    <span class="fs-3 fw-bold">$24,847.84</span>
+                                    <span class="fs-3 fw-bold">$0.00</span>
                                     <span class="badge bg-success ms-3">
                                         <i class="bi bi-arrow-up"></i> Active
                                     </span>
@@ -695,6 +695,76 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('withdrawalForm');
+    const processingModal = new bootstrap.Modal(document.getElementById('processingModal'));
+    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const method = document.getElementById('bankMethod').checked ? 'bank' : 'crypto';
+        const amount = parseFloat(form.querySelector('input[type="number"]').value);
+        const currency = method === 'crypto' ? form.querySelector('#cryptoDetails select').value : null;
+
+        if (!amount || amount < 10) {
+            alert("Minimum amount is $10");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('_token', '{{ csrf_token() }}');
+        formData.append('method', method);
+        formData.append('amount', amount);
+        if (currency) formData.append('currency', currency);
+
+        processingModal.show();
+
+        fetch("{{ route('user.withdraw') }}", {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            processingModal.hide();
+            if (data.success) {
+                document.querySelector('#successModal .fw-bold:nth-child(2)').textContent = data.referenceId;
+                document.querySelector('#successModal .fw-bold:nth-child(4)').textContent = `$${data.amount.toFixed(2)}`;
+                document.querySelector('#successModal .fw-bold:nth-child(6)').textContent = `$${data.fee.toFixed(2)}`;
+                document.querySelector('#successModal .fw-bold:nth-child(8)').textContent = method === 'bank' ? 'Bank Transfer' : data.currency.toUpperCase();
+                successModal.show();
+            } else {
+                alert('Withdrawal failed.');
+            }
+        })
+        .catch(err => {
+            processingModal.hide();
+            alert('An error occurred.');
+            console.error(err);
+        });
+    });
+
+    // Handle method switching
+    document.querySelector('select').addEventListener('change', function (e) {
+        const showNew = e.target.value === 'add';
+        document.getElementById('newBankDetails').style.display = showNew ? 'block' : 'none';
+    });
+
+    document.getElementById('bankMethod').addEventListener('change', function () {
+        document.getElementById('bankDetails').style.display = 'block';
+        document.getElementById('cryptoDetails').style.display = 'none';
+    });
+
+    document.getElementById('cryptoMethod').addEventListener('change', function () {
+        document.getElementById('bankDetails').style.display = 'none';
+        document.getElementById('cryptoDetails').style.display = 'block';
+    });
+});
+</script>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

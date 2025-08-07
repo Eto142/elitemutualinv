@@ -223,7 +223,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <div class="card-text">$24,500.00</div>
+                                    <div class="card-text">$0.00</div>
                                     <div class="text-muted small">Across all deposits</div>
                                 </div>
                             </div>
@@ -239,7 +239,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <div class="card-text">$1,225.50</div>
+                                    <div class="card-text">$0.00</div>
                                     <div class="text-muted small">Total accrued interest</div>
                                 </div>
                             </div>
@@ -255,7 +255,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <div class="card-text">3</div>
+                                    <div class="card-text">0</div>
                                     <div class="text-muted small">Currently earning interest</div>
                                 </div>
                             </div>
@@ -272,74 +272,44 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="newFdForm">
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Amount</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text">$</span>
-                                                <input type="number" class="form-control" placeholder="1,000.00" min="1000" step="1" required>
-                                            </div>
-                                            <div class="form-text">Minimum deposit: $1,000.00</div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Tenure</label>
-                                            <select class="form-select" required>
-                                                <option value="">Select tenure</option>
-                                                <option value="3">3 Months (3.5% p.a.)</option>
-                                                <option value="6">6 Months (4.2% p.a.)</option>
-                                                <option value="12">1 Year (5.1% p.a.)</option>
-                                                <option value="24">2 Years (5.8% p.a.)</option>
-                                                <option value="36">3 Years (6.5% p.a.)</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">Payment Method</label>
-                                            <select class="form-select" required>
-                                                <option value="">Select payment method</option>
-                                                <option value="wallet">Wallet Balance ($5,342.50)</option>
-                                                <option value="bank">Bank Transfer</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="card bg-light">
-                                                <div class="card-body">
-                                                    <h6 class="card-title">Deposit Summary</h6>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="d-flex justify-content-between mb-2">
-                                                                <span class="text-muted">Principal:</span>
-                                                                <span class="fw-medium">$0.00</span>
-                                                            </div>
-                                                            <div class="d-flex justify-content-between mb-2">
-                                                                <span class="text-muted">Interest Rate:</span>
-                                                                <span class="fw-medium">0.0% p.a.</span>
-                                                            </div>
-                                                            <div class="d-flex justify-content-between">
-                                                                <span class="text-muted">Tenure:</span>
-                                                                <span class="fw-medium">0 Months</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="d-flex justify-content-between mb-2">
-                                                                <span class="text-muted">Interest Earned:</span>
-                                                                <span class="fw-medium">$0.00</span>
-                                                            </div>
-                                                            <div class="d-flex justify-content-between mb-2">
-                                                                <span class="text-muted">Maturity Date:</span>
-                                                                <span class="fw-medium">-</span>
-                                                            </div>
-                                                            <div class="d-flex justify-content-between">
-                                                                <span class="text-muted">Maturity Amount:</span>
-                                                                <span class="fw-medium">$0.00</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                               <form id="newFdForm" method="POST" action="{{ route('user.deposit.store') }}">
+    @csrf
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Amount</label>
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" name="amount" class="form-control" placeholder="1,000.00" min="1000" step="1" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Tenure</label>
+            <select name="tenure" class="form-select" required>
+                <option value="">Select tenure</option>
+                <option value="3">3 Months (3.5% p.a.)</option>
+                <option value="6">6 Months (4.2% p.a.)</option>
+                <option value="12">1 Year (5.1% p.a.)</option>
+                <option value="24">2 Years (5.8% p.a.)</option>
+                <option value="36">3 Years (6.5% p.a.)</option>
+            </select>
+        </div>
+        <div class="col-12">
+            <label class="form-label">Payment Method</label>
+            <select name="payment_method" class="form-select" required>
+                <option value="">Select payment method</option>
+                <option value="wallet">Wallet Balance ($5,342.50)</option>
+                <option value="bank">Bank Transfer</option>
+            </select>
+        </div>
+
+        <!-- Optional: Add live JS summary later -->
+        
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary w-100">Submit Deposit</button>
+        </div>
+    </div>
+</form>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -353,7 +323,7 @@
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h3 class="h5 mb-0">Active Fixed Deposits</h3>
-                        <span class="badge bg-primary rounded-pill">3</span>
+                        <span class="badge bg-primary rounded-pill"></span>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -381,28 +351,7 @@
                                             <button class="btn btn-sm btn-outline-secondary">View</button>
                                         </td>
                                     </tr>
-                                    <tr class="fd-active">
-                                        <td>FD-2025-078</td>
-                                        <td>$5,000.00</td>
-                                        <td>5.1% p.a.</td>
-                                        <td>22 Mar 2025</td>
-                                        <td>22 Mar 2024</td>
-                                        <td><span class="badge badge-active">Active</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-secondary">View</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="fd-active">
-                                        <td>FD-2025-112</td>
-                                        <td>$9,500.00</td>
-                                        <td>6.5% p.a.</td>
-                                        <td>05 Jun 2025</td>
-                                        <td>05 Jun 2026</td>
-                                        <td><span class="badge badge-active">Active</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-secondary">View</button>
-                                        </td>
-                                    </tr>
+                                   
                                 </tbody>
                             </table>
                         </div>

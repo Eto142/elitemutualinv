@@ -246,155 +246,131 @@
       </header>
       
       <!-- Content -->
-      <div class="p-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h2 class="h4 mb-0">All Transactions</h2>
-          <div class="d-flex gap-2">
+
+<div class="p-4">
+    <!-- Header and Export -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h4 mb-0">All Transactions</h2>
+        <div class="d-flex gap-2">
             <button class="btn btn-outline-secondary">
-              <i class="bi bi-download me-2"></i> Export
+                <i class="bi bi-download me-2"></i> Export
             </button>
-          </div>
         </div>
-        
-        <!-- Filters -->
-        <div class="card transaction-card mb-4">
-          <div class="card-body">
-            <form>
-              <div class="row g-3">
-                <div class="col-md-3">
-                  <label class="form-label">Date From</label>
-                  <input type="date" class="form-control">
+    </div>
+
+    <!-- Filters -->
+    <div class="card transaction-card mb-4">
+        <div class="card-body">
+            <form method="GET" action="{{ route('user.transactions') }}">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Date From</label>
+                        <input type="date" name="from" value="{{ request('from') }}" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Date To</label>
+                        <input type="date" name="to" value="{{ request('to') }}" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Type</label>
+                        <select class="form-select" name="type">
+                            <option value="all">All Types</option>
+                            <option value="credit" {{ request('type') == 'credit' ? 'selected' : '' }}>Deposit</option>
+                            <option value="debit" {{ request('type') == 'debit' ? 'selected' : '' }}>Withdrawal</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Status</label>
+                        <select class="form-select" name="status">
+                            <option value="all">All Status</option>
+                            <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Completed</option>
+                            <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="failed" {{ request('status') == 'failed' ? 'selected' : '' }}>Failed</option>
+                        </select>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Apply Filters</button>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                  <label class="form-label">Date To</label>
-                  <input type="date" class="form-control">
-                </div>
-                <div class="col-md-3">
-                  <label class="form-label">Type</label>
-                  <select class="form-select">
-                    <option>All Types</option>
-                    <option>Deposit</option>
-                    <option>Withdrawal</option>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <label class="form-label">Status</label>
-                  <select class="form-select">
-                    <option>All Status</option>
-                    <option>Completed</option>
-                    <option>Pending</option>
-                    <option>Failed</option>
-                  </select>
-                </div>
-                <div class="col-12 d-flex justify-content-end">
-                  <button type="submit" class="btn btn-primary">Apply Filters</button>
-                </div>
-              </div>
             </form>
-          </div>
         </div>
-        
-        <!-- Transactions Table -->
-        <div class="card transaction-card">
-          <div class="card-header d-flex justify-content-between align-items-center">
+    </div>
+
+    <!-- Transactions Table -->
+    <div class="card transaction-card">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <h3 class="h5 mb-0">Recent Transactions</h3>
             <div class="input-group" style="max-width: 300px;">
-              <span class="input-group-text"><i class="bi bi-search"></i></span>
-              <input type="text" class="form-control" placeholder="Search transactions...">
+                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search transactions..." disabled>
             </div>
-          </div>
-          
-          <div class="table-responsive">
-            <table class="table transaction-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Type</th>
-                  <th>Method</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Amount</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td data-label="ID">TXN-78945</td>
-                  <td data-label="Type">Deposit</td>
-                  <td data-label="Method">Bank Transfer</td>
-                  <td data-label="Date">May 15, 2025</td>
-                  <td data-label="Status"><span class="badge badge-success">Completed</span></td>
-                  <td data-label="Amount">$1,250.00</td>
-                  <td>
-                    <button class="btn btn-sm btn-outline-secondary">
-                      <i class="bi bi-eye"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td data-label="ID">TXN-78944</td>
-                  <td data-label="Type">Withdrawal</td>
-                  <td data-label="Method">Crypto</td>
-                  <td data-label="Date">May 14, 2025</td>
-                  <td data-label="Status"><span class="badge badge-success">Completed</span></td>
-                  <td data-label="Amount">$500.00</td>
-                  <td>
-                    <button class="btn btn-sm btn-outline-secondary">
-                      <i class="bi bi-eye"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td data-label="ID">TXN-78943</td>
-                  <td data-label="Type">Deposit</td>
-                  <td data-label="Method">Bank Transfer</td>
-                  <td data-label="Date">May 12, 2025</td>
-                  <td data-label="Status"><span class="badge badge-pending">Pending</span></td>
-                  <td data-label="Amount">$750.00</td>
-                  <td>
-                    <button class="btn btn-sm btn-outline-secondary">
-                      <i class="bi bi-eye"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td data-label="ID">TXN-78942</td>
-                  <td data-label="Type">Withdrawal</td>
-                  <td data-label="Method">Bank Transfer</td>
-                  <td data-label="Date">May 10, 2025</td>
-                  <td data-label="Status"><span class="badge badge-failed">Failed</span></td>
-                  <td data-label="Amount">$1,000.00</td>
-                  <td>
-                    <button class="btn btn-sm btn-outline-secondary">
-                      <i class="bi bi-eye"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          
-          <div class="card-footer d-flex justify-content-between align-items-center">
-            <div class="text-muted">
-              Showing 1 to 4 of 24 entries
-            </div>
-            <nav aria-label="Page navigation">
-              <ul class="pagination pagination-sm mb-0">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#">Next</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
         </div>
-      </div>
+
+        <div class="table-responsive">
+            <table class="table transaction-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Method</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Amount</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($transactions as $txn)
+                        <tr>
+                            <td data-label="ID">{{ $txn->transaction_id }}</td>
+                            <td data-label="Type">{{ ucfirst($txn->transaction) }}</td>
+                            <td data-label="Method">
+                                {{ $txn->transaction == 'credit' ? 'Bank Transfer' : 'Cryptocurrency' }}
+                            </td>
+                            <td data-label="Date">{{ $txn->created_at->format('M d, Y') }}</td>
+                            <td data-label="Status">
+                                @if($txn->status == 1)
+                                    <span class="badge bg-success">Completed</span>
+                                @elseif($txn->status == 0)
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                @else
+                                    <span class="badge bg-danger">Failed</span>
+                                @endif
+                            </td>
+                            <td data-label="Amount">
+                                @if($txn->transaction == 'credit')
+                                    <span class="text-success">+${{ number_format($txn->credit, 2) }}</span>
+                                @else
+                                    <span class="text-danger">-${{ number_format($txn->debit, 2) }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center text-muted">No transactions found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card-footer d-flex justify-content-between align-items-center">
+            <div class="text-muted">
+                Showing {{ $transactions->firstItem() }} to {{ $transactions->lastItem() }} of {{ $transactions->total() }} entries
+            </div>
+            <nav>
+                {{ $transactions->withQueryString()->links('pagination::bootstrap-5') }}
+            </nav>
+        </div>
     </div>
+</div>
+
+
   </div>
 
   @include('user.footer')

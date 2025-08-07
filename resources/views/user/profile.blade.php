@@ -176,9 +176,9 @@
         <div class="dropdown">
           <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown">
             <div class="avatar me-2" style="width: 40px; height: 40px;">
-              <span class="text-white">JS</span>
+              <span class="text-white">{{ Auth::user()->last_name }}</span>
             </div>
-            <span>John Smith</span>
+            <span>{{ Auth::user()->first_name }}{{ Auth::user()->last_name }}</span>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -196,7 +196,7 @@
           <div class="card-body">
             <div class="d-flex flex-column flex-md-row align-items-center gap-4 profile-header">
               <div class="avatar">
-                <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=JohnSmith&backgroundColor=b6e3f4" alt="Profile picture">
+                <img src="" alt="Profile picture">
                 <div class="avatar-edit">
                   <i class="bi bi-camera"></i>
                   <input type="file" id="avatar-upload" class="d-none" accept="image/*">
@@ -204,8 +204,8 @@
               </div>
               
               <div class="text-center text-md-start">
-                <h2 class="h4 mb-1">John Smith</h2>
-                <p class="text-muted mb-2">john.smith@example.com</p>
+                <h2 class="h4 mb-1">{{ Auth::user()->first_name }}{{ Auth::user()->last_name }}</h2>
+                <p class="text-muted mb-2">{{ Auth::user()->email }}m</p>
                 <span class="badge badge-verified rounded-pill">
                   <i class="bi bi-check-circle-fill me-1"></i> Verified
                 </span>
@@ -230,65 +230,68 @@
           <div class="tab-pane fade show active" id="personal">
             <div class="card profile-card">
               <div class="card-body">
-                <form id="personalInfoForm">
-                  <h3 class="h5 mb-4">Basic Information</h3>
-                  
-                  <div class="row g-3 mb-4">
-                    <div class="col-md-6">
-                      <label for="firstName" class="form-label">First Name</label>
-                      <input type="text" class="form-control" id="firstName" value="John">
-                    </div>
-                    <div class="col-md-6">
-                      <label for="lastName" class="form-label">Last Name</label>
-                      <input type="text" class="form-control" id="lastName" value="Smith">
-                    </div>
-                    <div class="col-md-6">
-                      <label for="email" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="email" value="john.smith@example.com" readonly>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="phone" class="form-label">Phone</label>
-                      <input type="tel" class="form-control" id="phone" value="+1 (555) 123-4567">
-                    </div>
-                    <div class="col-md-6">
-                      <label for="dob" class="form-label">Date of Birth</label>
-                      <input type="date" class="form-control" id="dob" value="1985-06-15">
-                    </div>
-                    <div class="col-md-6">
-                      <label for="gender" class="form-label">Gender</label>
-                      <select class="form-select" id="gender">
-                        <option value="male" selected>Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                  </div>
-                  
-                  <h3 class="h5 mb-4">Address Information</h3>
-                  
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <label for="country" class="form-label">Country</label>
-                      <select class="form-select" id="country">
-                        <option value="us" selected>United States</option>
-                        <option value="ca">Canada</option>
-                        <option value="uk">United Kingdom</option>
-                        <option value="au">Australia</option>
-                      </select>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="state" class="form-label">State/Province</label>
-                      <input type="text" class="form-control" id="state" value="California">
-                    </div>
-                  </div>
-                  
-                  <div class="d-flex justify-content-end mt-4">
-                    <button type="submit" class="btn btn-primary">
-                      <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                      Save Changes
-                    </button>
-                  </div>
-                </form>
+@if (session('success'))
+  <div class="alert alert-success">
+    {{ session('success') }}
+  </div>
+@endif
+
+<form action="{{ route('user.profile.update') }}" method="POST" id="personalInfoForm">
+  @csrf
+
+  <h3 class="h5 mb-4">Basic Information</h3>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-6">
+      <label for="firstName" class="form-label">First Name</label>
+      <input type="text" class="form-control" id="firstName" name="first_name" value="{{ old('first_name', Auth::user()->first_name) }}">
+    </div>
+    <div class="col-md-6">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input type="text" class="form-control" id="lastName" name="last_name" value="{{ old('last_name', Auth::user()->last_name) }}">
+    </div>
+    <div class="col-md-6">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" value="{{ Auth::user()->email }}" readonly>
+    </div>
+    <div class="col-md-6">
+      <label for="phone" class="form-label">Phone</label>
+      <input type="tel" class="form-control" id="phone" name="phone" value="{{ old('phone', Auth::user()->phone) }}">
+    </div>
+    <div class="col-md-6">
+      <label for="dob" class="form-label">Date of Birth</label>
+      <input type="date" class="form-control" id="dob" name="dob" value="{{ old('dob', Auth::user()->dob) }}">
+    </div>
+    <div class="col-md-6">
+      <label for="gender" class="form-label">Gender</label>
+      <select class="form-select" id="gender" name="gender">
+        <option value="male" {{ Auth::user()->gender === 'male' ? 'selected' : '' }}>Male</option>
+        <option value="female" {{ Auth::user()->gender === 'female' ? 'selected' : '' }}>Female</option>
+        <option value="other" {{ Auth::user()->gender === 'other' ? 'selected' : '' }}>Other</option>
+      </select>
+    </div>
+  </div>
+
+  <h3 class="h5 mb-4">Address Information</h3>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="country" class="form-label">Country</label>
+      <input type="text" class="form-control" id="country" name="country" value="{{ old('country', Auth::user()->country) }}">
+    </div>
+    <div class="col-md-6">
+      <label for="state" class="form-label">State/Province</label>
+      <input type="text" class="form-control" id="state" name="state" value="{{ old('state', Auth::user()->state) }}">
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mt-4">
+    <button type="submit" class="btn btn-primary">
+      Save Changes
+    </button>
+  </div>
+</form>
+
               </div>
             </div>
           </div>

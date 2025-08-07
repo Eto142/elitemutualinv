@@ -289,8 +289,7 @@
                         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3">
                             <h2 class="h4 mb-3 mb-md-0">My Mutual Fund Portfolio</h2>
                             <div class="d-flex align-items-center text-muted">
-                                <i class="bi bi-calendar me-2"></i>
-                                <span id="portfolioDate">May 15, 2025</span>
+                               
                             </div>
                         </div>
                     </div>
@@ -301,7 +300,7 @@
                         <div class="card summary-card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">Total Investment</h5>
-                                <p class="card-text">$24,847.84</p>
+                                <p class="card-text">$0.00</p>
                                 <div class="d-flex align-items-center">
                                     <span class="change-text text-success">
                                         <i class="bi bi-arrow-up"></i> 12.5%
@@ -315,10 +314,10 @@
                         <div class="card summary-card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">Current Value</h5>
-                                <p class="card-text">$28,456.23</p>
+                                <p class="card-text">$0.00</p>
                                 <div class="d-flex align-items-center">
                                     <span class="change-text text-success">
-                                        <i class="bi bi-arrow-up"></i> $3,608.39
+                                        <i class="bi bi-arrow-up"></i> $0.00
                                     </span>
                                     <span class="text-muted ms-2">Absolute gain</span>
                                 </div>
@@ -329,7 +328,7 @@
                         <div class="card summary-card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">Active Funds</h5>
-                                <p class="card-text">6</p>
+                                <p class="card-text">0</p>
                                 <div class="d-flex align-items-center">
                                     <a href="#activeFunds" class="text-primary">View Details</a>
                                 </div>
@@ -340,7 +339,7 @@
                         <div class="card summary-card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">Estimated Annual Return</h5>
-                                <p class="card-text">$3,108.28</p>
+                                <p class="card-text">$0.00</p>
                                 <div class="d-flex align-items-center">
                                     <span class="change-text text-success">
                                         <i class="bi bi-arrow-up"></i> 12.5%
@@ -1028,7 +1027,7 @@
                         <div class="mb-3">
                             <label class="form-label">Payment Method</label>
                             <select class="form-select">
-                                <option>Wallet Balance ($24,847.84)</option>
+                                <option>Wallet Balance ($0.00)</option>
                             </select>
                         </div>
 
@@ -1094,10 +1093,7 @@
                             <small class="text-muted">Interest Rate:</small>
                             <small class="fw-medium text-success" id="transactionInterest">12.5%</small>
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <small class="text-muted">Date:</small>
-                            <small class="fw-medium" id="transactionDate">May 10, 2025 14:30</small>
-                        </div>
+                        
                     </div>
 
                     <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Done</button>

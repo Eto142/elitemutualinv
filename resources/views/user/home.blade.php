@@ -23,64 +23,72 @@
                 </div>
 
                 <!-- Summary Cards -->
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-4 mb-md-5 summary-cards-container">
-                    <div class="col">
-                        <div class="card summary-card h-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center gap-3 mb-3">
-                                    <i class="bi bi-wallet2 text-success fs-5"></i>
-                                    <span class="card-title">Cash Balance</span>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <div class="card-text">$0.00</div>
-                                    <div class="change-text text-success">↑ 1.000%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card summary-card h-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center gap-3 mb-3">
-                                    <i class="bi bi-bank text-warning fs-5"></i>
-                                    <span class="card-title">Fixed Deposit</span>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <div class="card-text">$0.00</div>
-                                    <div class="change-text text-success">↑ 0.24%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card summary-card h-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center gap-3 mb-3">
-                                    <i class="bi bi-graph-up text-info fs-5"></i>
-                                    <span class="card-title">Mutual Funds</span>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <div class="card-text">$0.00</div>
-                                    <div class="change-text text-success">↑ 0.69%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card summary-card h-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center gap-3 mb-3">
-                                    <i class="bi bi-calculator text-primary fs-5"></i>
-                                    <span class="card-title">Total Networth</span>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <div class="card-text">$0.00</div>
-                                    <div class="change-text text-success">↑ 0.38%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row g-4 mb-4 summary-cards-container">
+    <!-- Cash Balance: full width on phone, 1/4 width on laptop -->
+    <div class="col-12 col-lg-3">
+        <div class="card summary-card h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <i class="bi bi-wallet2 text-success fs-5"></i>
+                    <span class="card-title">Cash Balance</span>
                 </div>
+                <div class="d-flex flex-column">
+                    <div class="card-text">$0.00</div>
+                    <div class="change-text text-success">↑ 0.00%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed Deposit: 50% on phone, 1/4 width on laptop -->
+    <div class="col-6 col-lg-3">
+        <div class="card summary-card h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <i class="bi bi-bank text-warning fs-5"></i>
+                    <span class="card-title">Fixed Deposit</span>
+                </div>
+                <div class="d-flex flex-column">
+                    <div class="card-text">$0.00</div>
+                    <div class="change-text text-success">↑ 0.00%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mutual Funds: 50% on phone, 1/4 width on laptop -->
+    <div class="col-6 col-lg-3">
+        <div class="card summary-card h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <i class="bi bi-graph-up text-info fs-5"></i>
+                    <span class="card-title">Mutual Funds</span>
+                </div>
+                <div class="d-flex flex-column">
+                    <div class="card-text">$0.00</div>
+                    <div class="change-text text-success">↑ 0.00%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Networth: full width on phone, 1/4 width on laptop -->
+    <div class="col-12 col-lg-3">
+        <div class="card summary-card h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <i class="bi bi-calculator text-primary fs-5"></i>
+                    <span class="card-title">Total Networth</span>
+                </div>
+                <div class="d-flex flex-column">
+                    <div class="card-text">$0.00</div>
+                    <div class="change-text text-success">↑ 0.00%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
                 <!-- Transaction History -->
                 <div class="card">
@@ -92,72 +100,72 @@
                             </a>
                         </div>
 
-                        <div class="table-responsive">
-                            <table class="table table-borderless transaction-table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">From</th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col" class="text-end"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>TRDP0527109</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <span class="transaction-type-dot"></span>
-                                                <span class="text-success fw-medium">Deposit</span>
-                                            </div>
-                                        </td>
-                                        <td>Bank</td>
-                                        <td>Nov 27, 2024</td>
-                                        <td><span class="badge badge-approved">Approved</span></td>
-                                        <td class="fw-semibold text-dark">+$55,000.00</td>
-                                        <td class="text-end">
-                                            <a href="#" class="text-primary text-decoration-none fw-medium">Details</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>TRDP0527670</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <span class="transaction-type-dot"></span>
-                                                <span class="text-success fw-medium">Deposit</span>
-                                            </div>
-                                        </td>
-                                        <td>Bank</td>
-                                        <td>May 17, 2024</td>
-                                        <td><span class="badge badge-approved">Approved</span></td>
-                                        <td class="fw-semibold text-dark">+$120,000.00</td>
-                                        <td class="text-end">
-                                            <a href="#" class="text-primary text-decoration-none fw-medium">Details</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>TRDP0527018</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <span class="transaction-type-dot"></span>
-                                                <span class="text-success fw-medium">Deposit</span>
-                                            </div>
-                                        </td>
-                                        <td>Bank</td>
-                                        <td>Mar 27, 2024</td>
-                                        <td><span class="badge badge-approved">Approved</span></td>
-                                        <td class="fw-semibold text-dark">+$150,000.00</td>
-                                        <td class="text-end">
-                                            <a href="#" class="text-primary text-decoration-none fw-medium">Details</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                       <div class="table-responsive">
+    <table class="table table-borderless align-middle transaction-table">
+        <thead class="bg-light text-muted">
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>From</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th class="text-end">Amount</th>
+                <th class="text-end">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($transactions as $txn)
+                <tr>
+                    <td>{{ $txn->transaction_id }}</td>
+
+                    <td>
+                        <span class="badge bg-{{ $txn->transaction_type === 'Credit' ? 'success' : 'danger' }}">
+                            {{ ucfirst($txn->transaction_type) }}
+                        </span>
+                    </td>
+
+                    <td>
+                        @if($txn->transaction === 'credit')
+                            Deposit
+                        @else
+                            Withdrawal
+                        @endif
+                    </td>
+
+                    <td>{{ \Carbon\Carbon::parse($txn->created_at)->format('M d, Y') }}</td>
+
+                    <td>
+                        @switch($txn->status)
+                            @case(0)
+                                <span class="badge bg-warning text-dark">Pending</span>
+                                @break
+                            @case(1)
+                                <span class="badge bg-success">Completed</span>
+                                @break
+                            @default
+                                <span class="badge bg-danger">Failed</span>
+                        @endswitch
+                    </td>
+
+                    <td class="text-end fw-semibold">
+                        @if ($txn->transaction_type === 'Credit')
+                            <span class="text-success">+${{ number_format($txn->credit, 2) }}</span>
+                        @else
+                            <span class="text-danger">-${{ number_format($txn->debit, 2) }}</span>
+                        @endif
+                    </td>
+
+                    
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7" class="text-center text-muted">No transactions found.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+
                 </div>
             </div>
         </div>

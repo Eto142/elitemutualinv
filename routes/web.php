@@ -7,12 +7,7 @@ use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\DepositController;
 use App\Http\Controllers\User\WithdrawalController;
 use Illuminate\Support\Facades\Route;
-
-
-
-
-
-
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('home.homepage');
@@ -45,10 +40,23 @@ Route::prefix('user')->as('user.')->middleware('auth')->group(function () {
     Route::get('/profile', [DashboardController::class, 'UserProfile'])->name('profile'); // user.message
     Route::post('/update-setting', [DashboardController::class, 'updateSettings'])->name('settings'); // user.settings
  Route::get('/transactions', [DashboardController::class, 'Transactions'])->name('transactions'); // user.message
-  Route::get('/deposit', [DepositController::class, 'index'])->name('deposit'); // user.message
+  Route::post('/profile-update', [DashboardController::class, 'updateProfile'])->name('profile.update');
+
+ 
+
+
+
+ Route::post('/deposit', [DepositController::class, 'MakeDeposit']);
+ 
+ 
+ Route::get('/deposit', [DepositController::class, 'index'])->name('deposit'); // user.message
   
   Route::get('/fixed-deposit', [DepositController::class, 'FixedDeposit'])->name('fixed.deposit'); // user.message
+  Route::post('/deposit-store', [DepositController::class, 'store'])->name('deposit.store');
    Route::get('/mutual-funds', [DepositController::class, 'MutualFunds'])->name('mutual.funds'); // user.message
 
-      Route::get('/withdrawal', [WithdrawalController::class, 'index'])->name('withdrawal'); // user.message
+      
+   
+    Route::post('/withdraw', [WithdrawalController::class, 'MakeWithdrawal'])->name('withdraw');
+   Route::get('/withdrawal', [WithdrawalController::class, 'index'])->name('withdrawal'); // user.message
 });
