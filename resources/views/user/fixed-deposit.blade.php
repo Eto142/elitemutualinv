@@ -341,7 +341,7 @@
                                 </thead>
                                 <tbody>
                                     <tr class="fd-active">
-                                        <td>FD-2025-045</td>
+                                        {{-- <td>FD-2025-045</td>
                                         <td>$10,000.00</td>
                                         <td>5.8% p.a.</td>
                                         <td>15 Jan 2025</td>
@@ -349,7 +349,7 @@
                                         <td><span class="badge badge-active">Active</span></td>
                                         <td>
                                             <button class="btn btn-sm btn-outline-secondary">View</button>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                    
                                 </tbody>
