@@ -87,7 +87,7 @@
             width: 250px;
             background-color: #ffffff;
             border-right: 1px solid #e9ecef;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             position: fixed;
@@ -103,11 +103,14 @@
             padding: 1.5rem;
             border-bottom: 1px solid #e9ecef;
             height: 72px;
+            flex-shrink: 0;
         }
         .sidebar-nav {
-            flex-grow: 1;
+            flex: 1;
             padding: 1.5rem;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
         .sidebar-nav .nav-link {
             color: #6c757d;
@@ -130,6 +133,7 @@
         .sidebar-footer {
             padding: 1.5rem;
             border-top: 1px solid #e9ecef;
+            flex-shrink: 0;
         }
         .main-content {
             flex-grow: 1;
@@ -249,6 +253,22 @@
             overflow: hidden;
         }
 
+        /* Custom scrollbar for sidebar */
+        .sidebar-nav::-webkit-scrollbar {
+            width: 6px;
+        }
+        .sidebar-nav::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 10px;
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
         /* Mobile-specific styles */
         @media (max-width: 992px) {
             .sidebar {
@@ -329,7 +349,7 @@
                     <span class="fw-semibold text-dark">Elite Mutual Investment</span>
                 </div>
             </div>
-            <div class="sidebar-nav scrollbar-hide">
+            <div class="sidebar-nav">
                 <div class="text-muted text-sm mb-3">Menu</div>
                 <nav class="nav flex-column">
                     <a class="nav-link active" href="{{ route('user.home') }}">
@@ -360,6 +380,12 @@
                     <a class="nav-link" href="{{ route('user.withdrawal') }}">
                         <i class="bi bi-question-circle"></i> Help & Center
                     </a>
+                    <a class="nav-link" href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </nav>
             </div>
 
@@ -379,3 +405,50 @@
 
         <!-- Overlay for mobile sidebar -->
         <div class="overlay" id="overlay"></div>
+        
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent">
+            <!-- Your main content here -->
+        </div>
+     </div>
+
+     <!-- Bootstrap JS Bundle with Popper -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+     
+     <script>
+        // Sidebar toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const mainContent = document.getElementById('mainContent');
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            
+            // For mobile view
+            function toggleSidebar() {
+                sidebar.classList.toggle('show');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('no-scroll');
+            }
+            
+            // Close sidebar when clicking on overlay
+            overlay.addEventListener('click', toggleSidebar);
+            
+            // Dark mode toggle
+            const darkModeSwitch = document.getElementById('darkModeSwitch');
+            if (darkModeSwitch) {
+                darkModeSwitch.addEventListener('change', function() {
+                    document.body.classList.toggle('dark-mode');
+                    // You might want to save the preference in localStorage
+                    localStorage.setItem('darkMode', this.checked);
+                });
+                
+                // Check for saved dark mode preference
+                if (localStorage.getItem('darkMode') === 'true') {
+                    darkModeSwitch.checked = true;
+                    document.body.classList.add('dark-mode');
+                }
+            }
+        });
+     </script>
+</body>
+</html>
