@@ -622,7 +622,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- My Portfolio Section -->
+                {{-- <!-- My Portfolio Section -->
                 <div class="card mb-4" id="activeFunds">
                     <div class="card-header">
                         <h3 class="h5 mb-0">My Portfolio</h3>
@@ -1099,7 +1099,7 @@
                     <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Done</button>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
