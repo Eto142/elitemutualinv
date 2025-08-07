@@ -6,10 +6,10 @@
   <title>Elite Mutual Investment - Login</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-      <!-- Include Toastr & jQuery (make sure these are above the script block below) -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <!-- Include Toastr & jQuery -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <style>
     /* ===== BASE STYLES ===== */
     :root {
@@ -25,6 +25,9 @@
       --border-dark: #475569;
       --gray-light: #64748b;
       --gray-dark: #94a3b8;
+      --radius: 0.5rem;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-dark: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
     }
     
     @font-face {
@@ -47,6 +50,7 @@
       color: var(--text-light);
       -webkit-font-smoothing: antialiased;
       line-height: 1.5;
+      min-height: 100vh;
     }
     
     .dark {
@@ -56,33 +60,35 @@
     
     /* ===== LAYOUT STRUCTURE ===== */
     .login-container {
-      display: grid;
-      place-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       min-height: 100vh;
-      padding: 1rem;
+      padding: 1.5rem;
     }
     
     .login-card {
       width: 100%;
       max-width: 28rem;
       background: var(--card-light);
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       padding: 2rem;
       display: grid;
-      gap: 2rem;
+      gap: 1.75rem;
     }
     
     .dark .login-card {
       background: var(--card-dark);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
+      box-shadow: var(--shadow-dark);
     }
     
     .logo-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1.25rem;
+      text-align: center;
     }
     
     .logo {
@@ -92,20 +98,20 @@
     }
     
     .logo-badge {
-      width: 3rem;
-      height: 3rem;
+      width: 2.75rem;
+      height: 2.75rem;
       background: var(--primary);
       border-radius: 0.375rem;
       display: grid;
       place-items: center;
       color: white;
       font-weight: bold;
-      font-size: 1.5rem;
+      font-size: 1.25rem;
     }
     
     .logo-text {
       font-weight: bold;
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       color: var(--text-light);
     }
     
@@ -121,11 +127,12 @@
     .form-header h2 {
       font-size: 1.25rem;
       font-weight: bold;
+      margin-bottom: 0.25rem;
     }
     
     .login-form {
       display: grid;
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
     
     .form-group {
@@ -151,7 +158,7 @@
       width: 100%;
       padding: 0.75rem 1rem 0.75rem 2.5rem;
       border: 1px solid var(--border-light);
-      border-radius: 0.375rem;
+      border-radius: var(--radius);
       font-size: 0.875rem;
       transition: all 0.2s;
     }
@@ -208,6 +215,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
     
     .remember-me {
@@ -238,7 +247,7 @@
       color: white;
       padding: 0.75rem;
       border: none;
-      border-radius: 0.375rem;
+      border-radius: var(--radius);
       font-size: 0.875rem;
       font-weight: 500;
       cursor: pointer;
@@ -274,7 +283,7 @@
       text-align: center;
       font-size: 0.75rem;
       color: var(--gray-light);
-      margin-top: 1rem;
+      margin-top: 0.5rem;
     }
     
     .dark .footer {
@@ -286,6 +295,46 @@
       position: fixed;
       top: 1rem;
       right: 1rem;
+      z-index: 10;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .login-container {
+        padding: 1rem;
+      }
+      
+      .login-card {
+        padding: 1.5rem;
+      }
+      
+      .logo {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .logo-text {
+        font-size: 1.1rem;
+      }
+      
+      .form-header h2 {
+        font-size: 1.1rem;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      .login-card {
+        padding: 1.25rem;
+      }
+      
+      .form-controls {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .forgot-link {
+        margin-top: 0.25rem;
+      }
     }
   </style>
 </head>
@@ -302,15 +351,16 @@
         <!-- Form Header -->
         <div class="form-header">
           <h2>Welcome Back</h2>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Please enter your credentials to login</p>
         </div>
       </div>
       
       <!-- Login Form -->
-       <form id="loginForm"> 
-    @csrf
+      <form id="loginForm"> 
+        @csrf
         <!-- Email Field -->
         <div class="form-group">
-          <label class="form-label">Email Address</label>
+          <label for="email" class="form-label">Email Address</label>
           <div class="input-wrapper">
             <i data-lucide="mail" class="input-icon"></i>
             <input type="email" id="email" class="form-input" name="email" placeholder="Enter your email" required>
@@ -319,7 +369,7 @@
         
         <!-- Password Field -->
         <div class="form-group">
-          <label class="form-label">Password</label>
+          <label for="password" class="form-label">Password</label>
           <div class="input-wrapper">
             <i data-lucide="lock" class="input-icon"></i>
             <input type="password" id="password" class="form-input" name="password" placeholder="Enter your password" required>
@@ -368,7 +418,8 @@
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     
     // Check for saved dark mode preference
-    if (localStorage.getItem('darkMode') === 'enabled') {
+    if (localStorage.getItem('darkMode') === 'enabled' || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('darkMode'))) {
       document.documentElement.classList.add('dark');
       darkModeToggle.checked = true;
     }
@@ -395,57 +446,59 @@
       lucide.createIcons();
     });
     
-   
+    // Configure toastr
+    toastr.options = {
+      closeButton: true,
+      progressBar: true,
+      positionClass: 'toast-top-right',
+      timeOut: 5000,
+      extendedTimeOut: 2000,
+    };
   </script>
 
-   <script>
-document.getElementById('loginForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
 
-    const form = e.target;
-    const formData = new FormData(form);
-    const token = document.querySelector('input[name="_token"]').value;
+      const form = e.target;
+      const formData = new FormData(form);
+      const token = document.querySelector('input[name="_token"]').value;
 
-    try {
+      try {
         const response = await fetch("{{ route('login') }}", {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': token,
-                'Accept': 'application/json',
-            },
-            body: formData
+          method: 'POST',
+          headers: {
+            'X-CSRF-TOKEN': token,
+            'Accept': 'application/json',
+          },
+          body: formData
         });
 
         const data = await response.json();
 
         if (response.ok && data.success) {
-            toastr.success(data.message || 'Login successful! Redirecting...');
-            setTimeout(() => {
-                window.location.href = data.redirect || "{{ route('user.home') }}";
-            }, 1500);
+          toastr.success(data.message || 'Login successful! Redirecting...');
+          setTimeout(() => {
+            window.location.href = data.redirect || "{{ route('user.home') }}";
+          }, 1500);
         } else {
-            let errorMsg = data.message || 'Login failed.';
-            if (data.errors) {
-                for (const key in data.errors) {
-                    if (data.errors.hasOwnProperty(key)) {
-                        toastr.error(data.errors[key][0]);
-                    }
-                }
-            } else {
-                toastr.error(errorMsg);
+          let errorMsg = data.message || 'Login failed.';
+          if (data.errors) {
+            for (const key in data.errors) {
+              if (data.errors.hasOwnProperty(key)) {
+                toastr.error(data.errors[key][0]);
+              }
             }
+          } else {
+            toastr.error(errorMsg);
+          }
         }
 
-    } catch (error) {
+      } catch (error) {
         toastr.error("Something went wrong. Please try again.");
         console.error("Login error:", error);
-    }
-});
-</script>
-
-<!-- Toastr CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
-<!-- Toastr JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+      }
+    });
+  </script>
 </body>
 </html>
