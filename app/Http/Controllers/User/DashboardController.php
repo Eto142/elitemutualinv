@@ -15,13 +15,17 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     //
-       //display user dashboard
- public function index()
+public function index()
 {
-    $query = Transaction::where('user_id', Auth::id());
-    $transactions = $query->orderBy('id', 'desc')->paginate(10);
+    $transactions = Transaction::where('user_id', Auth::id())
+        ->orderBy('id', 'desc')
+        ->paginate(10);
 
-    return view('user.home', compact('transactions'));
+    $deposit = Deposit::where('user_id', Auth::id())
+        ->where('status', '1')
+        ->sum('amount');
+
+    return view('user.home', compact('transactions', 'deposit'));
 }
 
 

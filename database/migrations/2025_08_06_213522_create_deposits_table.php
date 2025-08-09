@@ -20,6 +20,7 @@ class CreateDepositsTable extends Migration
             $table->date('maturity_date')->nullable();
             $table->decimal('maturity_amount', 15, 2)->nullable();
             $table->tinyInteger('status')->default(0)->comment('0 = pending, 1 = approved');
+             $table->string('transaction_id')->unique();
             $table->string('reference_id')->unique();
             $table->timestamps();
         });

@@ -60,6 +60,7 @@ class DepositController extends Controller
         $deposit->amount = $amount;
         $deposit->status = 0;
         $deposit->reference_id = $referenceId;
+        $deposit->transaction_id = $transaction_id;
         $deposit->save();
 
         // Save Transaction
@@ -95,83 +96,7 @@ class DepositController extends Controller
 
 
 
-    // public function MakeDeposit(Request $request)
-    // {
-    //     $request->validate([
-    //         'method' => 'required|in:bank,crypto',
-    //         'amount' => 'required|numeric|min:10',
-    //         'currency' => 'nullable|string',
-    //     ]);
-
-    //     DB::beginTransaction();
-
-    //     try {
-    //         $user = Auth::user();
-    //         $amount = $request->input('amount');
-    //         $method = $request->input('method');
-    //         $currency = $request->input('currency') ?? 'usd';
-    //         $referenceId = 'DEP-' . strtoupper(Str::random(8));
-    //         $transactionId = strtoupper(Str::random(12));
-
-    //         // Save to deposits table
-    //         $deposit = new Deposit();
-    //         $deposit->user_id = $user->id;
-    //         $deposit->method = $method;
-    //         $deposit->currency = $currency;
-    //         $deposit->amount = $amount;
-    //         $deposit->status = 0; // 0 = pending
-    //         $deposit->reference_id = $referenceId;
-    //         $deposit->save();
-
-    //         // Save to transactions table
-    //         $transaction = new Transaction();
-    //         $transaction->user_id = $user->id;
-    //         $transaction->transaction_id = $transactionId;
-    //         $transaction->transaction_type = 'Credit';
-    //         $transaction->transaction = 'credit';
-    //         $transaction->credit = $amount;
-    //         $transaction->debit = 0;
-    //         $transaction->status = 0;
-    //         $transaction->save();
-
-    //         DB::commit();
-
-    //         $response = [
-    //             'success' => true,
-    //             'type' => $method,
-    //             'currency' => $currency,
-    //             'amount' => $amount,
-    //             'referenceId' => $referenceId
-    //         ];
-
-    //         // Optional: Include wallet address if it's a crypto deposit
-    //         if ($method === 'crypto') {
-    //             $response['address'] = $this->generateCryptoAddress($currency);
-    //         }
-
-    //         return response()->json($response);
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Something went wrong.',
-    //             'error' => $e->getMessage()
-    //         ], 500);
-    //     }
-    // }
-
-    // private function generateCryptoAddress($currency)
-    // {
-    //     return match (strtolower($currency)) {
-    //         'btc' => '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
-    //         'eth' => '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068D',
-    //         'usdt' => 'TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs',
-    //         'usdc' => '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-    //         default => 'UnknownCurrency',
-    //     };
-    // }
-
+  
 
 
 

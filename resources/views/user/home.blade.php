@@ -49,7 +49,7 @@
                     <span class="card-title">Fixed Deposit</span>
                 </div>
                 <div class="d-flex flex-column">
-                    <div class="card-text">$0.00</div>
+                    <div class="card-text">${{ $deposit }}</div>
                     <div class="change-text text-success">↑ 0.00%</div>
                 </div>
             </div>
