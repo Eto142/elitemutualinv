@@ -45,51 +45,28 @@ class ManageUserController extends Controller
     $data = [
         'userProfile'       => $user,
         'credit_transfers'  => Transaction::where('user_id', $id)
-                                    ->where('transaction_status', '1')
+                                    ->where('status', '1')
                                     ->where('transaction_type', 'Credit')
-                                    ->sum('transaction_amount'),
+                                    ->sum('credit'),
 
         'debit_transfers'   => Transaction::where('user_id', $id)
-                                    ->where('transaction_status', '1')
+                                    ->where('status', '1')
                                     ->where('transaction_type', 'Debit')
-                                    ->sum('transaction_amount'),
+                                    ->sum('debit'),
 
         'user_deposits'     => Deposit::where('user_id', $id)
                                     ->where('status', '1')
                                     ->sum('amount'),
 
-        'user_loans'        => LoanApplication::where('user_id', $id)
-                                    ->where('status', '1')
-                                    ->sum('loan_amount'),
+       
 
- 'outstanding_balance' => LoanApplication::where('user_id', $id)
-                                            ->value('outstanding_balance'),
 
-                                             'monthly_payment' => LoanApplication::where('user_id', $id)
-                                            ->value('monthly_payment'),
-
-    'interest_rate' => LoanApplication::where('user_id', $id)
-                                      ->sum('interest_rate'),
-
-        'user_credit'       => Credit::where('user_id', $id)
-                                    ->where('status', '1')
-                                    ->sum('amount'),
-
-        'user_debit'        => Debit::where('user_id', $id)
-                                    ->where('status', '1')
-                                    ->sum('amount'),
-
-        'loan'              => LoanApplication::where('user_id', $id)
-                                    ->orderBy('id', 'desc')
-                                    ->get(),
 
         'user_deposits_list'=> Deposit::where('user_id', $id)
                                     ->orderBy('id', 'desc')
                                     ->get(),
 
-        'user_loans_list'   => LoanApplication::where('user_id', $id)
-                                    ->orderBy('id', 'desc')
-                                    ->get(),
+
 
         'user_transactions' => Transaction::where('user_id', $id)
                                     ->orderBy('id', 'desc')

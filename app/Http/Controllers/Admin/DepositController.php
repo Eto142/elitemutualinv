@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Deposit;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class DepositController extends Controller
 {
@@ -21,6 +23,53 @@ class DepositController extends Controller
     }
 
 
+
+
+
+
+  public function AddUserDeposit(Request $request)
+{
+    // Validate incoming request
+    $validated = $request->validate([
+        'id'           => 'required|exists:users,id',
+        'amount'       => 'required|numeric',
+        'method'       => 'required|string',
+        'deposit_date' => 'required|date',
+    ]);
+
+    // Find user
+    $user = User::findOrFail($validated['id']);
+
+    // Generate IDs
+    $referenceId   = 'DEP-' . strtoupper(Str::random(8));
+    $transactionId = strtoupper(Str::random(12));
+
+    // Create Deposit (approved immediately)
+    $deposit = new Deposit();
+    $deposit->user_id      = $user->id;
+    $deposit->method       = $validated['method'];
+    $deposit->amount       = $validated['amount'];
+    $deposit->status       = 1; // ✅ Approved
+    $deposit->reference_id = $referenceId;
+    $deposit->created_at   = $validated['deposit_date'];
+    $deposit->save();
+
+    // Create Transaction (approved immediately)
+    $transaction = new Transaction();
+    $transaction->user_id          = $user->id;
+    $transaction->transaction_id   = $transactionId;
+    $transaction->transaction_type = "Credit";
+    $transaction->transaction      = "credit";
+    $transaction->credit           = $validated['amount'];
+    $transaction->debit            = 0;
+    $transaction->status           = 1; // ✅ Approved
+    $transaction->save();
+
+    return redirect()->back()->with('success', 'Deposit successfully added and approved.');
+}
+
+
+
     
     public function approveDeposit(Request $request, $id)
 {
@@ -32,7 +81,7 @@ class DepositController extends Controller
     $deposit->save();
 
     // Update the status of the corresponding transaction
-    Transaction::where('transaction_id', $deposit->transaction_id)->update(['transaction_status' => 1]);
+    Transaction::where('transaction_id', $deposit->transaction_id)->update(['status' => 1]);
 
      $email = $deposit->email; 
      $amount = $deposit->amount;
@@ -57,7 +106,7 @@ public function DeclineDeposit(Request $request, $id)
     $deposit->save();
 
     // Update the status of the corresponding transaction
-    Transaction::where('transaction_id', $deposit->transaction_id)->update(['transaction_status' => 2]);
+    Transaction::where('transaction_id', $deposit->transaction_id)->update(['status' => 2]);
      $email = $deposit->email; 
      $amount = $deposit->amount;
      $reason = $deposit->reason;

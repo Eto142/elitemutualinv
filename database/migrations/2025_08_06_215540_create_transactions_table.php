@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('transaction_id')->unique();
             $table->string('transaction_type'); // e.g., Credit, Debit
             $table->string('transaction');      // e.g., credit, withdrawal, deposit
+            $table->string('amount');
             $table->decimal('credit', 15, 2)->default(0);
             $table->decimal('debit', 15, 2)->default(0);
             $table->tinyInteger('status')->default(0); // 0 = pending, 1 = approved

@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Dashboard</title>
+    <title>Admin Dashboard | Elite Mutual Investment</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
     <style>
         :root {
             --primary-color: #1a237e;
@@ -89,10 +88,6 @@
             font-size: 1.1rem;
         }
         
-        .nav-link .badge {
-            margin-left: auto;
-        }
-        
         .sidebar-footer {
             position: sticky;
             bottom: 0;
@@ -115,35 +110,12 @@
             margin-right: 10px;
         }
         
-        .user-name {
-            font-weight: 500;
-            margin-bottom: 0;
-            font-size: 0.9rem;
-        }
-        
-        .user-role {
-            font-size: 0.75rem;
-            opacity: 0.7;
-        }
-        
         /* Main Content */
         .main-content {
             margin-left: 250px;
             padding: 20px;
             transition: all 0.3s ease;
             min-height: 100vh;
-        }
-        
-        /* Overlay for mobile */
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
         }
         
         /* Cards */
@@ -184,33 +156,6 @@
             border-left-color: var(--danger-color);
         }
         
-        .stat-card .value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .stat-card .label {
-            color: #6c757d;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-        
-        .stat-card .change {
-            font-size: 0.8rem;
-            margin-top: 5px;
-        }
-        
-        .stat-card .change.positive {
-            color: var(--success-color);
-        }
-        
-        .stat-card .change.negative {
-            color: var(--danger-color);
-        }
-        
         /* Tables */
         .table th {
             border-top: none;
@@ -223,47 +168,85 @@
             padding-bottom: 15px;
         }
         
-        .table td {
-            vertical-align: middle;
-            padding: 12px 15px;
-        }
-        
-        .table tr:hover {
-            background-color: rgba(0, 0, 0, 0.02);
-        }
-        
-        /* Badges */
-        .badge {
-            padding: 5px 10px;
-            font-weight: 500;
-            font-size: 0.75rem;
-            border-radius: 4px;
-        }
-        
-        /* User Avatar */
-        .user-avatar-sm {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 10px;
-        }
-        
-        /* Mobile Toggle Button */
-        .sidebar-toggle {
-            display: none;
+        /* Alert System */
+        .alert-container {
             position: fixed;
-            top: 15px;
-            left: 15px;
-            z-index: 1100;
-            background: var(--primary-color);
-            color: white;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            width: 100%;
+            max-width: 400px;
+            padding: 0 15px;
+        }
+
+        .alert {
+            border-radius: 8px;
             border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .alert-content {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            position: relative;
+        }
+
+        .alert-icon {
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .alert-text {
+            flex: 1;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            padding: 0;
+            margin-left: 12px;
+            opacity: 0.7;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .alert-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.3);
+            animation: progressBar 5s linear forwards;
+        }
+
+        @keyframes progressBar {
+            0% { width: 100%; }
+            100% { width: 0%; }
+        }
+
+        /* Profile Image */
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        /* Tab Styles */
+        .hover-border-success:hover {
+            color: #198754 !important;
+            border-bottom: 3px solid #198754 !important;
+        }
+        
+        .hover-border-warning:hover {
+            color: #ffc107 !important;
+            border-bottom: 3px solid #ffc107 !important;
         }
         
         /* Responsive Adjustments */
@@ -289,24 +272,6 @@
                 display: block;
             }
         }
-        
-        /* Scrollbar styling */
-        .sidebar::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .sidebar::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .sidebar::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-        }
-        
-        .sidebar::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
     </style>
 </head>
 <body>
@@ -321,7 +286,8 @@
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="logo" width="">
+            <img src="assets/img/logo.png" alt="logo">
+            <span>Elite Mutual</span>
         </div>
         
         <div class="sidebar-nav">
@@ -337,48 +303,15 @@
             
             <a href="{{ route('admin.loans') }}" class="nav-link">
                 <i class="fas fa-piggy-bank"></i>
-                <span>Deposits</span>
+                <span> Manage Deposits</span>
             </a>
-
-            {{-- <a href="{{ route('admin.loans') }}" class="nav-link">
-                <i class="fas fa-piggy-bank"></i>
-                <span>Loans</span>
-            </a> --}}
-
-              {{-- <a href="#" class="nav-link">
-                <i class="fas fa-piggy-bank"></i>
-                <span>Accounts</span>
-            </a> --}}
             
-
-                {{-- <a href="{{ route('admin.deposits') }}" class="nav-link">
-                <i class="fas fa-file-invoice-dollar"></i>
-                <span> Deposits</span>
-            </a> --}}
-            
-            {{-- <a href="{{ route('admin.loans') }}" class="nav-link">
-                <i class="fas fa-hand-holding-usd"></i>
-                <span>Loans</span>
-            </a>
-             --}}
-            {{-- <a href="#" class="nav-link">
-                <i class="fas fa-credit-card"></i>
-                <span>Messages</span>
-            </a> --}}
-            
-              {{-- <a href="{{ route('admin.transactions') }}" class="nav-link">
+            <a href="{{ route('admin.transactions') }}" class="nav-link">
                 <i class="fas fa-exchange-alt"></i>
                 <span>Transactions</span>
-               
-            </a> --}}
-        
+            </a>
             
-            {{-- <a href="#" class="nav-link">
-                <i class="fas fa-chart-line"></i>
-                <span>Reports</span>
-            </a> --}}
-            
-          <!-- Logout Link with Hidden Form -->
+                   <!-- Logout Link with Hidden Form -->
 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('admin-logout-form').submit();">
     <i class="fas fa-sign-out-alt"></i>
     <span>Logout</span>
@@ -388,9 +321,24 @@
 <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
     @csrf
 </form>
-
         </div>
         
-     
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <img src="https://ui-avatars.com/api/?name=Admin+User" class="user-avatar" alt="Admin">
+                <div>
+                    <p class="user-name mb-0">Admin User</p>
+                    <small class="user-role">Administrator</small>
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+

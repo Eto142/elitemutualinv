@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\DepositController;
 use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\ManageLoanController;
 use App\Http\Controllers\Admin\ManageUserController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\Admin\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,6 +48,8 @@ use Illuminate\Support\Facades\Route;
 
 
 //DepositController 
+
+ Route::post('/approve-user-deposit', [DepositController::class, 'AddUserDeposit'])->name('addUserDeposit');
    Route::post('/approve-deposit/{id}', [DepositController::class, 'ApproveDeposit'])->name('approve-deposit');
   Route::post('/decline-deposit/{id}', [DepositController::class, 'DeclineDeposit'])->name('decline-deposit');
 

@@ -1,66 +1,90 @@
-<!-- Bootstrap Bundle with Popper -->
+    <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Custom JS -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Sidebar toggle functionality
             const sidebar = document.getElementById('sidebar');
             const sidebarToggle = document.getElementById('sidebarToggle');
             const sidebarOverlay = document.getElementById('sidebarOverlay');
-            const mainContent = document.getElementById('mainContent');
             
-            // Toggle sidebar on button click
             sidebarToggle.addEventListener('click', function() {
                 sidebar.classList.toggle('show');
                 sidebarOverlay.classList.toggle('show');
             });
             
-            // Close sidebar when clicking on overlay
             sidebarOverlay.addEventListener('click', function() {
                 sidebar.classList.remove('show');
                 sidebarOverlay.classList.remove('show');
             });
             
-            // Close sidebar when clicking outside on mobile
-            document.addEventListener('click', function(event) {
-                if (window.innerWidth <= 992 && 
-                    !sidebar.contains(event.target) && 
-                    event.target !== sidebarToggle) {
-                    sidebar.classList.remove('show');
-                    sidebarOverlay.classList.remove('show');
-                }
+            // Tooltip initialization
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
             });
             
-            // Active link highlighting
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
+            // Alert handling
+            function showAlert(type, message) {
+                const alertContainer = document.getElementById('alertContainer');
+                const alert = document.createElement('div');
+                alert.className = `alert alert-${type} alert-dismissible fade show`;
+                alert.innerHTML = `
+                    <div class="alert-content">
+                        <div class="alert-icon">
+                            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                        </div>
+                        <div class="alert-text">
+                            ${message}
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="alert-progress"></div>
+                `;
+                alertContainer.appendChild(alert);
+                
+                // Auto-dismiss after 5 seconds
+                setTimeout(() => {
+                    alert.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+                    alert.style.transform = 'translateX(100%)';
+                    alert.style.opacity = '0';
                     
-                    // Close sidebar on mobile after clicking a link
-                    if (window.innerWidth <= 992) {
-                        sidebar.classList.remove('show');
-                        sidebarOverlay.classList.remove('show');
-                    }
-                });
+                    setTimeout(() => {
+                        alert.remove();
+                    }, 500);
+                }, 5000);
+            }
+            
+            // Form submission handlers
+            document.getElementById('depositForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                showAlert('success', 'Deposit added successfully!');
+                $('#addDepositModal').modal('hide');
+                this.reset();
             });
             
-            // Time period buttons
-            const periodButtons = document.querySelectorAll('.btn-group .btn');
-            periodButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    periodButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                });
+            document.getElementById('mutualFundForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                showAlert('success', 'Mutual fund added successfully!');
+                $('#addMutualFundModal').modal('hide');
+                this.reset();
             });
             
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 992) {
-                    sidebar.classList.remove('show');
-                    sidebarOverlay.classList.remove('show');
-                }
+            document.getElementById('cashBalanceForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                showAlert('success', 'Cash balance updated successfully!');
+                $('#addCashBalanceModal').modal('hide');
+                this.reset();
+            });
+            
+            // Logout button
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                // Add logout logic here
+                showAlert('info', 'You have been logged out successfully.');
             });
         });
     </script>

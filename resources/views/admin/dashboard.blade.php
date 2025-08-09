@@ -84,25 +84,25 @@
                 </div>
             </div>
         </div>
-{{--         
+        
         <div class="col-md-6 col-lg-3 mb-3">
             <div class="card stat-card bg-warning bg-opacity-10 border-warning">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <div class="value fs-3 fw-bold">7</div>
-                            <div class="label text-muted">Total Transfers</div>
+                            <div class="label text-muted">Total Transactions</div>
                         </div>
                         <div class="bg-warning bg-opacity-25 p-3 rounded">
                             <i class="fas fa-exchange-alt text-warning fs-4"></i>
                         </div>
                     </div>
                     <div class="mt-2">
-                        <span class="text-muted">Between accounts</span>
+                        <span class="text-muted">all accounts</span>
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
         
         <div class="col-md-6 col-lg-3 mb-3">
             <div class="card stat-card bg-danger bg-opacity-10 border-danger">
