@@ -7,6 +7,7 @@ use App\Models\Credit;
 use App\Models\Debit;
 use App\Models\Deposit;
 use App\Models\LoanApplication;
+use App\Models\Profit;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -59,7 +60,8 @@ class ManageUserController extends Controller
                                     ->sum('amount'),
 
        
-
+                 'user_profits'     => Profit::where('user_id', $id)
+                                    ->sum('amount'),
 
 
         'user_deposits_list'=> Deposit::where('user_id', $id)

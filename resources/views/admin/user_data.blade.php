@@ -24,6 +24,13 @@
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCashBalanceModal">
                     <i class="fas fa-plus-circle me-1"></i> Add Cash Balance
                 </button>
+
+                  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProfitModal">
+                    <i class="fas fa-plus-circle me-1"></i> Add Profit
+                </button>
+
+
+                
                 <button class="btn btn-info">
                     <i class="fas fa-broom me-1"></i> Clear Account
                 </button>
@@ -127,6 +134,18 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="col-6">
+                                <div class="card stat-card primary">
+                                    <div class="card-body p-2 text-center">
+                                        <h6 class="card-title text-primary mb-1">Total Profit</h6>
+                                        <p class="card-text fw-bold fs-5 mb-0">${{ $user_profits }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="col-6">
                                 <div class="card stat-card warning">
                                     <div class="card-body p-2 text-center">
@@ -134,6 +153,7 @@
                                         <p class="card-text fw-bold fs-5 mb-0">$0.00</p>
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -436,6 +456,49 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+     <!-- Add Profit Modal -->
+    <div class="modal fade" id="addProfitModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Profit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+               <form action="{{ route('admin.addUserProfit') }}" method="POST">
+    @csrf
+   <input type="hidden" name="id" value="{{$userProfile->id}}"/>
+    <div class="modal-body">
+        <div class="mb-3">
+            <label class="form-label">Amount</label>
+            <input type="number" class="form-control" name="amount" placeholder="Enter profit amount" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"> Date</label>
+            <input type="date" class="form-control" name="profit_date" required>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success">Add Profit</button>
+    </div>
+</form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 
     <!-- Add Mutual Fund Modal -->
     <div class="modal fade" id="addMutualFundModal" tabindex="-1" aria-hidden="true">
