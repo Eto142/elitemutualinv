@@ -25,8 +25,21 @@ public function index()
         ->where('status', '1')
         ->sum('amount');
 
-    return view('user.home', compact('transactions', 'deposit'));
+    $credit = Transaction::where('user_id', Auth::id())
+        ->where('status', '1')
+        ->where('transaction_type', 'Credit')
+        ->sum('credit');
+
+    $debit = Transaction::where('user_id', Auth::id())
+        ->where('status', '1')
+        ->where('transaction_type', 'Debit')
+        ->sum('debit');
+
+    $networth = $credit - $debit;
+
+    return view('user.home', compact('transactions', 'deposit', 'credit', 'debit','networth'));
 }
+
 
 
 public function UserProfile() {
