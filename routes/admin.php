@@ -1,14 +1,20 @@
 <?php
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\CashBalanceController;
 use App\Http\Controllers\Admin\CreditDebitController;
 use App\Http\Controllers\Admin\DepositController;
 use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\ManageLoanController;
 use App\Http\Controllers\Admin\ManageUserController;
+use App\Http\Controllers\Admin\MutualFundController;
 use App\Http\Controllers\Admin\ProfitController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Models\CashBalance;
+use App\Models\MutualFund;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -58,6 +64,14 @@ use Illuminate\Support\Facades\Route;
   //transaction controller
    Route::get('user_transactions', [TransactionController::class, 'usersTransaction'])->name('transactions');
    Route::post('/approve-user-profit', [ProfitController::class, 'AddUserProfit'])->name('addUserProfit');
+
+   // add mutual fund
+   Route::post('/admin/add-user-mutual-fund', [MutualFundController::class, 'addUserMutualFund'])
+     ->name('addUserMutualFund');
+
+     //add cash balance
+      Route::post('/admin/add-user-cash-balance', [CashBalanceController::class, 'addUserCashBalance'])
+     ->name('addUserCashBalance');
 });
 });
 

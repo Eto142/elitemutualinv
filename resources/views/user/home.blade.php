@@ -33,7 +33,7 @@
                     <span class="card-title">Cash Balance</span>
                 </div>
                 <div class="d-flex flex-column">
-                    <div class="card-text">$0</div>
+                    <div class="card-text">${{ $cash_balance }}</div>
                     <div class="change-text text-success">↑ 0.00%</div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                     <span class="card-title">Mutual Funds</span>
                 </div>
                 <div class="d-flex flex-column">
-                    <div class="card-text">$0</div>
+                    <div class="card-text">${{ $mutual_funds}}</div>
                     <div class="change-text text-success">↑ 0.00%</div>
                 </div>
             </div>

@@ -130,7 +130,7 @@
                                 <div class="card stat-card primary">
                                     <div class="card-body p-2 text-center">
                                         <h6 class="card-title text-primary mb-1">Cash Balance</h6>
-                                        <p class="card-text fw-bold fs-5 mb-0">$0.00</p>
+                                        <p class="card-text fw-bold fs-5 mb-0">${{ $user_cash_balance }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                                 <div class="card stat-card warning">
                                     <div class="card-body p-2 text-center">
                                         <h6 class="card-title text-warning mb-1">Total Mutual Funds</h6>
-                                        <p class="card-text fw-bold fs-5 mb-0">$0.00</p>
+                                        <p class="card-text fw-bold fs-5 mb-0">${{ $user_mutual_funds }}</p>
                                     </div>
                                 </div>
                                 
@@ -246,11 +246,12 @@
                                             {{ $transaction->transaction_type }}
                                         </span>
                                     </td>
-                                    <td class="fw-bold">{{ $transaction->transaction_amount }}</td>
-                                    <td>{{ $transaction->description ?? 'N/A' }}</td>
+                                    <td class="fw-bold">{{ $transaction->credit ? $transaction->credit : $transaction->debit }}
+</td>
+                                    <td>{{ $transaction->transaction ?? 'N/A' }}</td>
                                     <td>
-                                        <span class="badge bg-{{ $transaction->transaction_status == '1' ? 'success' : 'warning' }}">
-                                            {{ $transaction->transaction_status == '1' ? 'Completed' : 'Pending' }}
+                                        <span class="badge bg-{{ $transaction->status == '1' ? 'success' : 'warning' }}">
+                                            {{ $transaction->status == '1' ? 'Completed' : 'Pending' }}
                                         </span>
                                     </td>
                                     <td>
@@ -508,7 +509,9 @@
                     <h5 class="modal-title">Add Mutual Fund</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="mutualFundForm">
+                         <form action="{{ route('admin.addUserMutualFund') }}" method="POST">
+    @csrf
+   <input type="hidden" name="id" value="{{$userProfile->id}}"/>
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Fund Name</label>
@@ -545,24 +548,33 @@
                     <h5 class="modal-title">Add Cash Balance</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="cashBalanceForm">
+                                        <form action="{{ route('admin.addUserCashBalance') }}" method="POST">
+    @csrf
+   <input type="hidden" name="id" value="{{$userProfile->id}}"/>
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Amount</label>
                             <input type="number" class="form-control" name="amount" placeholder="Enter cash amount" required>
                         </div>
-                        <div class="mb-3">
+                    
+                         {{-- <div class="mb-3">
                             <label class="form-label">Transaction Type</label>
                             <select class="form-control" name="type" required>
                                 <option value="credit">Credit (Add Funds)</option>
                                 <option value="debit">Debit (Withdraw Funds)</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label class="form-label">Description</label>
                             <textarea class="form-control" name="description" rows="3" placeholder="Transaction description"></textarea>
                         </div>
+
+                         <div class="mb-3">
+                            <label class="form-label">Date</label>
+                            <input type="date" class="form-control" name="date" required>
+                        </div>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary">Update Balance</button>

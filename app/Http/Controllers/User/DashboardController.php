@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\Deposit;
-use App\Models\LoanApplication;
-use App\Models\Transaction;
+use App\Models\CashBalance;
 use App\Models\Credit;
 use App\Models\Debit;
+use App\Models\Deposit;
+use App\Models\LoanApplication;
+use App\Models\MutualFund;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +27,14 @@ public function index()
         ->where('status', '1')
         ->sum('amount');
 
+         $mutual_funds = MutualFund::where('user_id', Auth::id())
+        ->where('status', '1')
+        ->sum('amount');
+
+         $cash_balance = CashBalance::where('user_id', Auth::id())
+        ->where('status', '1')
+        ->sum('amount');
+
     $credit = Transaction::where('user_id', Auth::id())
         ->where('status', '1')
         ->where('transaction_type', 'Credit')
@@ -37,7 +47,7 @@ public function index()
 
     $networth = $credit - $debit;
 
-    return view('user.home', compact('transactions', 'deposit', 'credit', 'debit','networth'));
+    return view('user.home', compact('transactions', 'deposit', 'credit', 'debit','networth','mutual_funds', 'cash_balance'));
 }
 
 

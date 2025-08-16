@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CashBalance;
 use App\Models\Credit;
 use App\Models\Debit;
 use App\Models\Deposit;
 use App\Models\LoanApplication;
+use App\Models\MutualFund;
 use App\Models\Profit;
 use App\Models\Transaction;
 use App\Models\User;
@@ -62,6 +64,12 @@ class ManageUserController extends Controller
        
                  'user_profits'     => Profit::where('user_id', $id)
                                     ->sum('amount'),
+
+             'user_mutual_funds'     => MutualFund::where('user_id', $id)
+                                  ->sum('amount'),
+                                  
+         'user_cash_balance'     => CashBalance::where('user_id', $id)
+                                  ->sum('amount'),
 
 
         'user_deposits_list'=> Deposit::where('user_id', $id)
