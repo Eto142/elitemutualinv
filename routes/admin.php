@@ -6,13 +6,17 @@ use App\Http\Controllers\Admin\CreditDebitController;
 use App\Http\Controllers\Admin\DepositController;
 use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\ManageLoanController;
+use App\Http\Controllers\Admin\ManagePaymentController;
 use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\Admin\MutualFundController;
 use App\Http\Controllers\Admin\ProfitController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\WalletController;
 use App\Models\CashBalance;
 use App\Models\MutualFund;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -72,6 +76,13 @@ use Illuminate\Support\Facades\Route;
      //add cash balance
       Route::post('/admin/add-user-cash-balance', [CashBalanceController::class, 'addUserCashBalance'])
      ->name('addUserCashBalance');
+
+     //wallet update
+     
+//Manage Payment
+   Route::get('manage-payment', [ManagePaymentController::class, 'ManagePayment'])->name('manage.payment');
+
+    Route::post('/choose-wallet', [WalletController::class, 'chooseWallet'])->name('choose.wallet');
 });
 });
 

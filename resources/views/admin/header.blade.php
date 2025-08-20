@@ -305,6 +305,11 @@
                 <i class="fas fa-piggy-bank"></i>
                 <span> Manage Deposits</span>
             </a>
+
+             <a href="{{ route('admin.manage.payment') }}" class="nav-link">
+                <i class="fas fa-piggy-bank"></i>
+                <span>Update Wallet</span>
+            </a>
             
             <a href="{{ route('admin.transactions') }}" class="nav-link">
                 <i class="fas fa-exchange-alt"></i>

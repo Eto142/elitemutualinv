@@ -429,14 +429,16 @@ document.addEventListener('DOMContentLoaded', function () {
 </script> --}}
 
 
+{{-- <script>
+    const walletAddresses = @json($wallets->pluck('address', 'method'));
+</script>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     // Define wallet addresses manually
     const walletAddresses = {
-        btc: 'bc1quaeyvd3uaz7l6u3z6pyl045leuhqkgj3kw9ct3', // Replace with your BTC address
-        eth: 'bc1quaeyvd3uaz7l6u3z6pyl045leuhqkgj3kw9ct3', // Replace with your ETH address
-        usdt: 'bc1quaeyvd3uaz7l6u3z6pyl045leuhqkgj3kw9ct3' // Replace with your USDT address
+      
     };
 
     // Toggle deposit method
@@ -587,7 +589,164 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('cryptoAmount').value = '';
     }
 });
+</script> --}}
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Fetch wallet addresses from the DB (method => address)
+    const walletAddresses = @json($wallets->pluck('address', 'method'));
+
+    // Toggle deposit method
+    const methodCards = document.querySelectorAll('.deposit-method-card');
+    methodCards.forEach(card => {
+        card.addEventListener('click', function() {
+            methodCards.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+
+            const method = this.dataset.method;
+            document.getElementById('selectedMethod').value = method;
+
+            if (method === 'bank') {
+                document.getElementById('bankForm').classList.remove('d-none');
+                document.getElementById('cryptoForm').classList.add('d-none');
+            } else {
+                document.getElementById('bankForm').classList.add('d-none');
+                document.getElementById('cryptoForm').classList.remove('d-none');
+            }
+        });
+    });
+
+    // Form submission handlers
+    document.getElementById('submitBankDeposit').addEventListener('click', submitBankDeposit);
+    document.getElementById('submitCryptoDeposit').addEventListener('click', submitCryptoDeposit);
+
+    // Copy wallet address
+    document.getElementById('copyWalletAddress').addEventListener('click', copyWalletAddress);
+
+    // Navigation buttons
+    document.getElementById('newDeposit').addEventListener('click', resetForm);
+    document.getElementById('goToDashboard').addEventListener('click', () => {
+        window.location.href = "{{ route('user.home') }}";
+    });
+
+    function submitBankDeposit() {
+        const amount = parseFloat(document.getElementById('bankAmount').value);
+        if (!amount || amount < 10) {
+            alert('Please enter a valid amount (minimum $10)');
+            return;
+        }
+
+        document.getElementById('hiddenAmount').value = amount;
+        sendDeposit('bank', amount);
+    }
+
+    function submitCryptoDeposit() {
+        const amount = parseFloat(document.getElementById('cryptoAmount').value);
+        const currency = document.getElementById('cryptoCurrency').value;
+
+        if (!amount || amount < 10) {
+            alert('Please enter a valid amount (minimum $10)');
+            return;
+        }
+
+        document.getElementById('hiddenAmount').value = amount;
+        document.getElementById('hiddenCurrency').value = currency;
+
+        sendDeposit('crypto', amount, currency);
+    }
+
+    function sendDeposit(method, amount, currency = null) {
+        const formData = new FormData();
+        formData.append('_token', '{{ csrf_token() }}');
+        formData.append('method', method);
+        formData.append('amount', amount);
+        if (currency) formData.append('currency', currency);
+
+        fetch("{{ route('user.deposit') }}", {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                if (method === 'crypto') {
+                    showCryptoModal(data, currency);
+                } else {
+                    showConfirmation(data);
+                }
+            } else {
+                alert(data.message || 'Deposit failed.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        });
+    }
+
+    function showCryptoModal(data, currency) {
+        const currencyName = document.getElementById('cryptoCurrency').options[
+            document.getElementById('cryptoCurrency').selectedIndex
+        ].text;
+
+        const address = walletAddresses[currency]; // ✅ dynamic from DB
+        document.getElementById('walletAddress').value = address || "No wallet found";
+        document.getElementById('selectedCrypto').textContent = currencyName;
+
+        document.querySelector('#cryptoModal .qr-code-container img').src =
+            `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${address}`;
+
+        const modal = new bootstrap.Modal(document.getElementById('cryptoModal'));
+        modal.show();
+
+        document.getElementById('cryptoModal').addEventListener('hidden.bs.modal', () => {
+            showConfirmation({
+                method: 'crypto',
+                amount: document.getElementById('cryptoAmount').value,
+                referenceId: data.referenceId || 'DEP-XXXXXX'
+            });
+        }, { once: true });
+    }
+
+    function showConfirmation(data) {
+        document.getElementById('referenceId').textContent = data.referenceId || 'DEP-XXXXXX';
+        document.getElementById('depositMethod').textContent =
+            data.method === 'crypto' ? document.getElementById('cryptoCurrency').options[
+                document.getElementById('cryptoCurrency').selectedIndex
+            ].text : 'Bank Transfer';
+        document.getElementById('depositAmount').textContent = `$${parseFloat(data.amount).toFixed(2)}`;
+        document.getElementById('depositStatus').textContent = 'Pending';
+        document.getElementById('bankContactInfo').style.display =
+            data.method === 'bank' ? 'block' : 'none';
+
+        document.getElementById('step1').classList.add('d-none');
+        document.getElementById('step2').classList.remove('d-none');
+    }
+
+    function copyWalletAddress() {
+        const walletAddress = document.getElementById('walletAddress');
+        walletAddress.select();
+        document.execCommand('copy');
+
+        const copyBtn = document.getElementById('copyWalletAddress');
+        const originalHTML = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="bi bi-check"></i> <span class="d-none d-md-inline">Copied!</span>';
+
+        setTimeout(() => {
+            copyBtn.innerHTML = originalHTML;
+        }, 2000);
+    }
+
+    function resetForm() {
+        document.getElementById('step2').classList.add('d-none');
+        document.getElementById('step1').classList.remove('d-none');
+        document.getElementById('bankAmount').value = '';
+        document.getElementById('cryptoAmount').value = '';
+    }
+});
 </script>
+
 
 </body>
 </html>

@@ -3,22 +3,29 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Models\Deposit;
 use App\Models\Transaction;
+use App\Models\Wallet;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class DepositController extends Controller
 {
-    public function index()
-    {
+public function index()
+{
+    $data['deposit'] = Deposit::where('user_id', Auth::user()->id)
+        ->orderBy('id', 'desc')
+        ->get();
 
-      $data['deposit'] =  Deposit::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+    // Fetch all available wallets set by the admin
+    $wallets = Wallet::all();
 
-        return view('user.deposit.index', $data);
-    }
+    return view('user.deposit.index', array_merge($data, ['wallets' => $wallets]));
+}
+
 
     public function FixedDeposit()
     {
@@ -85,13 +92,17 @@ class DepositController extends Controller
         ]);
 
     } catch (\Exception $e) {
-        DB::rollBack();
-        return response()->json([
-            'success' => false,
-            'message' => 'An unexpected error occurred.',
-            'error' => $e->getMessage()
-        ], 500);
-    }
+    DB::rollBack();
+    \Log::error('Deposit Error: ' . $e->getMessage(), [
+        'trace' => $e->getTraceAsString()
+    ]);
+
+    return response()->json([
+        'success' => false,
+        'message' => 'An unexpected error occurred.',
+        'error' => $e->getMessage()
+    ], 500);
+}
 }
 
 
