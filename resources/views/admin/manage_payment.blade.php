@@ -23,6 +23,15 @@
     </div>
 @endif
 
+
+
+@foreach($wallets as $wallet)
+    <div>
+        <strong>{{ strtoupper($wallet->method) }} Wallet:</strong> 
+        {{ $wallet->address }}
+    </div>
+@endforeach
+
     <!-- Wallet Update Card -->
     <div class="card shadow-sm">
         <div class="card-header bg-light">
