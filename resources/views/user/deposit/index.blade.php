@@ -168,12 +168,13 @@
                                 </div>
 
                                 <div class="d-flex flex-column flex-sm-row gap-2 gap-md-3">
-                                    <button class="btn btn-primary flex-grow-1 py-2">
-                                        New Deposit
-                                    </button>
-                                    <button class="btn btn-outline-secondary flex-grow-1 py-2">
-                                        Go to Dashboard
-                                    </button>
+                                    <a href="{{route('user.deposit') }}" class="btn btn-primary flex-grow-1 py-2">
+                                    New Deposit
+                                    </a>
+                                 <a href="{{route('user.home') }}" class="btn btn-outline-secondary flex-grow-1 py-2">
+                                 Go to Dashboard
+                                    </a>
+
                                 </div>
                             </div>
                         </form>
